@@ -4,6 +4,8 @@ extends Resource
 @export var acceleration: float = 1280.0
 @export var deceleration: float = 1920.0
 @export var jump_velocity: float = -320.0
+## Launch speed off a bounce pad. Separate from jump_velocity so the jump is unchanged everywhere else.
+const BOUNCE_VELOCITY: float = -480.0
 @export var gravity: float = 960.0
 @export var terminal_velocity: float = 480.0
 @export var coyote_ticks: int = 6
