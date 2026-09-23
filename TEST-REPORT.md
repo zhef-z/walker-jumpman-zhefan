@@ -92,7 +92,7 @@ Checked in a windowed run.
 | Thrusters appear when airborne | ✅ |
 | Flame longer rising than falling | [not yet checked] |
 | Visual vs collider alignment | [not yet checked] |
-| Facing after respawn | [not yet checked] |
+| Facing after respawn | keeps the facing you died with — left unchanged by design |
 
 Screenshots: [add filenames]
 
@@ -117,13 +117,111 @@ colour change.
 **Re-test:** jumped facing right and facing left. The gem stays at that side
 of the head in the air; facing is readable throughout the jump.
 
+### 2. Cycling platform
+
+**Observed:** the platform never blinked and always drew fully solid, but
+I fell through it when landing.
+
+**Cause:** the level was drawn once in _ready() and never redrawn, so the
+visual froze. Collision was toggling correctly underneath.
+
+**Change:** redraw the level every tick while a cycling platform exists.
+
+**Re-test:** solid, then a half-second blink, then a faint outline
+while absent, repeating. Falling through only when visibly gone. ✅
+
+---
+
+## Level extension
+
+### Prediction 3 — observed before the fix
+
+With only the level data changed, standing at the right end of Ground C:
+
+| Expected by the brief | Observed |
+|---|---|
+| New spikes drawn ~96 px below the strip | ✅ floating in empty air below a bare strip |
+| FINISH label stays at the old finish | ✅ still over Ground C |
+| Grid stops at the old width | ✅ hard edge at x 960 |
+| Background rect stops short | not visible — same colour as the clear colour |
+
+Screenshot: [add filename]
+
+### After fixing the drawing
+
+Regression check, done numerically by Claude Code: old and new drawing
+formulas evaluated on the original level data. Original hazard
+[320, 304, 24, 16] — all three spikes identical vertex for vertex. Old
+finish flag and label identical. Hatch marks identical on four of five
+original platforms; the fifth (section 01 step block) deliberately
+changed, see brief Revision 2.
+
+Checked in play:
+
+| Check | Result |
+|---|---|
+| New spikes sit on the strip | ✅ |
+| Finish flag at the new finish, correct height | ✅ |
+| FINISH label follows the finish | ✅ |
+| 03 and 04 section labels present | ✅ (04 moved left to clear the flag) |
+| Bounce pad visibly different | ✅ |
+| Bounce reaches the observation deck | ✅ |
+| Pressing jump on the pad still bounces | ✅ |
+| Level can be completed by hand | ✅ |
+| Sections 01 and 02 play as before | ✅ |
+| Camera follows across the full 1472 px level; finish and labels visible | ✅ |
+
+### Route test
+
+**Before:** after the level data changed, the old route could no
+longer finish — it ran out of jump marks at x 712 and couldn't wait for
+the cycling platform. Left failing until the level was complete.
+
+**What changed in the fixture:**
+- route_driver.gd: jump marks became records with optional wait
+  (stand still until the cycling platform has at least 0.9 s of solid
+  time left) and hold (release right after N ticks to shorten the
+  arc). New marks past x 712 cover the bounce pad, the deck, the
+  cycling platform, the spike slot and the final hop.
+- session.gd: added a read-only cycle_solid_left() query so the driver
+  doesn't duplicate the cycle maths. No behaviour change.
+- test_game.gd: new check extension-landings — the route must actually
+  stand on the deck, the cycling platform and the spike strip, so a
+  route that skipped a tier by luck can't pass.
+- No assertion removed or weakened. complete-real-route still requires
+  COMPLETE with zero deaths within 900 ticks.
+
+**After:** WALKER TESTS: 26 checks / 0 failures. Route completes in 536
+ticks, identical across two consecutive runs.
+
+**Note:** the route finishes in mid-air, touching the goal area at the
+top of its last hop. The goal is 56 px tall and so is a jump, so any
+approach that clears the second spike cluster enters the goal before
+landing.
+
+---
+
+## Predicted failures — results
+
+| Prediction | Result |
+|---|---|
+| 1. Cycling platform timing wrong in either direction | Not observed. Had to wait and watch the rhythm (not too long); never caught by it vanishing before I could jump (not too short). No exact attempt count kept. |
+| 2. Jumping as the platform vanishes | Confirmed — jump succeeds just after it vanishes. Kept deliberately, see FRICTIONAL entry 12. Buffered landing not skipped. |
+| 3. New spikes drawn in the wrong place | Confirmed before the fix, fixed, see Level extension. |
+
+---
+
+## Movement checks
+
+| Check | Result |
+|---|---|
+| Coyote: step off a ledge, jump immediately | ✅ jumps |
+| Buffer: press jump just before landing | ✅ jumps on contact |
+| Failure and recovery in the new section | ✅ retries normally |
+
 ---
 
 ## Not yet tested
 
-- Level extension (bounce pad, observation deck, cycling platform, spike
-  strip, moved finish)
-- Failure and recovery in the new section
-- Camera and presentation across the wider level
-- Updated route test fixture
-- Coyote time and jump buffering
+- Flame longer rising than falling (appearance table)
+- Visual vs collider alignment (appearance table)

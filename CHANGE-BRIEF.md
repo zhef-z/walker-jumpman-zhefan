@@ -370,3 +370,33 @@ size, belly glow, raised arms, thrusters. The thrusters are the loudest by
 far, so the airborne state still reads clearly. The original reasoning
 was redundancy because the sprite is small; in practice, facing in the
 air mattered more than one extra airborne cue.
+
+### Revision 2 — hatch clamp also touches section 01
+
+Section 3 says sections 01 and 02 stay geometrically identical. They
+do — no solid moved and collision is unchanged. But clamping the
+hatch marks so they stop poking out of 16 px platforms also fixed
+the same pre-existing overshoot on the section 01 step block, so
+there is one visible drawing change inside the original route. I
+kept it rather than special-case one platform by position.
+
+### Revision 3 — the bounce pad ignores the jump button
+
+On the pad you always get the bounce, never a normal jump. Without
+this, pressing jump on the pad overwrote the bounce velocity with the
+ordinary jump one tick later, cutting the rise from about 120 px to
+about 53 px — not enough to reach the deck. Whether you reached the
+deck would then depend on whether you happened to press jump. This
+touches jump-adjacent state, which section 3 lists as must-not-change,
+so I'm stating it: jump_velocity is unchanged, coyote and buffering
+are unchanged everywhere else, and the only difference is that a jump
+request is discarded on the tick the pad fires.
+
+### Revision 4 — how the predictions came out
+
+Prediction 1 did not happen: the starting cycle held — I had to wait
+for it, and it never vanished before I could get off. Prediction 2
+happened as predicted: a jump pressed just after the platform vanishes
+still succeeds. I kept it on purpose; reasoning in FRICTIONAL entry 12.
+Prediction 3 happened as predicted, roughly 96 px low, and was fixed
+by deriving the drawing from the level data.

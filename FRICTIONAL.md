@@ -169,12 +169,146 @@ side of the head in the air, so facing is readable throughout the jump.
 
 ---
 
-## Open
+## 8. Seeing prediction 3 happen before fixing it
 
-- **Facing on respawn.** Claude Code pointed out that `reset_at()` resets
-  velocity and jump state but not `facing`, so if you die moving left you
-  respawn facing left. With the starter's tiny pupil shift you'd never
-  notice; with the gem swinging to the edge of the head it'll be obvious. I
-  decided not to change it, because retry behaviour is on my
-  must-not-change list. Still need to see it in play and decide whether
-  it reads as a bug.
+I added the new level data first and left the drawing code alone, so I
+could watch it fail on data it was never written for. Standing at the
+right end of Ground C: the new spikes were drawn about 96 px below the
+spike strip, floating in empty air, while the strip above them was bare.
+The FINISH label was still hanging over Ground C, the background grid
+stopped dead at x 960, and hatch marks poked out of the bottom of the
+new platforms. Prediction 3 was right, including the direction and
+roughly the size of the offset.
+
+One problem in the same class couldn't be seen at all: the background
+rect also stopped short of the new width, but it's the same colour as the
+clear colour, so there's no seam on screen. Only reading the code found
+it. Not everything wrong can be caught by playing.
+
+**Human / AI:** I chose the order (data first, then fix) so the
+prediction could be tested. Claude Code worked out what would be
+visible from where I could stand.
+
+---
+
+## 9. Making the drawing follow the data
+
+Hazards, background, grid, hills, finish flag and FINISH label now come
+from the level data instead of fixed numbers. Claude Code checked the
+regression numerically rather than by eye: it evaluated the old and new
+formulas on the original level data and compared every vertex. The
+original hazard's three spikes came out identical.
+
+Clamping the hatch marks also changed the section 01 step block, which
+had the same overshoot. Recorded in the brief as Revision 2.
+
+Separately, I sent a contradictory instruction about moving the 04
+labels — "move left" toward a position that was actually to the right.
+Claude Code asked which I meant instead of guessing. Moved them left.
+
+---
+
+## 10. Bounce pad
+
+With the pad working the level could be finished by hand for the first
+time. One behaviour I hadn't anticipated: pressing jump on the pad would
+have replaced the bounce with a normal jump one tick later, not enough
+to reach the deck. The pad now ignores the jump button. Recorded as
+Revision 3, because it touches jump-adjacent behaviour.
+
+Checked in play: the pad looks different from a platform, the bounce
+reaches the deck, jumping on the pad still bounces, spikes sit on the
+strip, the flag and FINISH label are at the new finish, the level can
+be completed, and sections 01 and 02 play as before.
+
+---
+
+## 11. The platform looked solid and wasn't
+
+The cycling platform never blinked and always looked fully solid, but I
+kept falling through it.
+
+Cause: the level is drawn once, in _ready(). The player redraws itself
+every tick, the level never does. So the picture froze at the first
+frame, when the platform happened to be solid. The collision underneath
+was correct the whole time — solid for 60% of each cycle — but with a
+frozen picture I was stepping on at random points and dropping through
+about 40% of the time with no warning.
+
+This is the thing the course keeps pointing at: the code was right, the
+physics was right, and the game was still wrong, because what the
+player sees had stopped matching what the game checks. Nothing errored.
+
+Fix: redraw the level every tick while it has a cycling platform.
+
+**Human / AI:** I found it by playing. Claude suggested two possible
+causes; Claude Code confirmed the first by reading the code. Claude Code
+had checked redrawing for the player in the original implementation but
+not for the level.
+
+**Re-test:** the platform now stays solid, blinks in the last half
+second, then shows only a faint outline, and repeats. I only fall
+through when it's visibly gone.
+
+---
+
+## 12. Testing the predictions
+
+**Prediction 1 — timing window.** Played the cycling platform
+repeatedly; I didn't keep an exact count. I did have to stop on the
+deck and watch the rhythm before going, so the window isn't too long.
+I didn't get caught by it vanishing before I could get off, so it isn't
+too short. The starting values (3 s cycle, 1.8 s solid) held.
+
+**Prediction 2 — jumping as it vanishes.** Standing still, pressing
+jump just after the platform vanished still produced a jump.
+Prediction confirmed. Pressing well after it vanished dropped me, as
+expected. On the buffer side, pressing jump while falling onto the
+platform as it appeared didn't bounce me straight off.
+
+Decision: keep the coyote jump off a vanished platform. The window is
+0.1 s and comes right after a half-second blink warning, so it reads
+as forgiving a near-miss rather than letting the player out of the
+rule — you still have to be on the platform while it's solid.
+
+**Facing on respawn.** You respawn facing whichever way you died.
+Left unchanged, as decided, because retry behaviour is on my
+must-not-change list.
+
+**Other checks:** stepping off a ledge and pressing jump immediately
+still jumps; pressing jump just before landing jumps on contact;
+dying in the new section retries normally.
+
+**Human / AI:** I ran these by hand. Claude wrote up my results.
+
+---
+
+## 13. Updating the route test
+
+The supplied route driver was a list of five x positions where it
+tapped jump while holding right forever. It couldn't stop, so it could
+never wait for the cycling platform. Claude Code changed each mark into
+a small record with two optional behaviours: wait (stand still until
+the platform will still be solid on arrival) and hold (let go of right
+partway through a jump).
+
+The hold turned out to matter more than I expected. A full-speed jump
+covers about 109 px and the spike slot is 40 px wide, so no full-speed
+jump from anywhere you can stand lands in it. The route has to release
+right mid-air to shorten the arc. That's the real skill section 04 asks
+for: air control, not picking the right launch point. The brief said
+"the distance is easy, the placement isn't"; it's more specific than
+that.
+
+The first working attempt clipped the tip of a spike by about 0.3 px.
+Moving an earlier wait point 6 px left gave the slot hop enough time to
+climb. Final route: 536 ticks, identical across two runs. The 900-tick
+cap didn't need raising and no assertion was changed.
+
+**Human / AI:** I set the constraints — keep zero deaths, don't weaken
+anything, add a check for the new section. Claude Code designed and
+tuned the driver.
+
+---
+
+## Open
