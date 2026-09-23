@@ -127,12 +127,24 @@ func run() -> void:
 	check("fall-boundary", game.state == Game.State.DYING, {"state":game.state})
 	await fresh()
 	var route = Route.new()
+	route.game = game
 	var route_ticks := 0
+	# Extension landings, sampled while grounded on the y=224 tier (rect x range +/- the 9px half-width).
+	var landed := {"deck": false, "cycling": false, "strip": false}
 	while game.state == Game.State.PLAYING and route_ticks < 900:
 		route.step(game.player)
 		await steps(1)
 		route_ticks += 1
+		if game.player.is_on_floor() and absf(game.player.position.y - 224.0) < 2.0:
+			var px: float = game.player.position.x
+			if px >= 999.0 and px <= 1113.0:
+				landed.deck = true
+			elif px >= 1159.0 and px <= 1241.0:
+				landed.cycling = true
+			elif px >= 1271.0 and px <= 1449.0:
+				landed.strip = true
 	check("complete-real-route", game.state == Game.State.COMPLETE and game.deaths == 0, {"state":game.state,"deaths":game.deaths,"ticks":route_ticks,"position":str(game.player.position),"jump_marks_used":route.next_jump})
+	check("extension-landings", landed.deck and landed.cycling and landed.strip and game.state == Game.State.COMPLETE, landed)
 	game.start_session()
 	game.start_session()
 	check("replay-idempotent", game.state == Game.State.PLAYING and game.deaths == 0 and game.player.jumps == 0, {"state":game.state,"deaths":game.deaths,"jumps":game.player.jumps})
