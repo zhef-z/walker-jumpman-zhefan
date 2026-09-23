@@ -356,3 +356,17 @@ or relaxing the zero-deaths condition to get a green run.
 ## Revisions
 
 *(appended as I go — everything above stays as originally written)*
+
+### Revision 1 — the gem no longer recentres in the air
+
+Section 1 says five cues change when airborne, including the gem moving
+back to the centre. Playing it, that removed the facing cue exactly when
+the new section needs it — landing between the spike clusters, you need
+to know which way you're drifting. The gem now keeps its facing offset in
+the air and only changes size and colour.
+
+That takes the airborne cues from five to four: gem size and colour, ball
+size, belly glow, raised arms, thrusters. The thrusters are the loudest by
+far, so the airborne state still reads clearly. The original reasoning
+was redundancy because the sprite is small; in practice, facing in the
+air mattered more than one extra airborne cue.
