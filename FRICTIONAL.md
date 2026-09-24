@@ -17,8 +17,11 @@ reported that opening the project in Godot 4.7.2 had rewritten the file:
 and the starter's header comment had been replaced with Godot's
 boilerplate.
 
-**What I checked:** [fill in — e.g. whether you resized the window to see
-the stretch change, or just read the diff]
+**What I checked:** I read the diff rather than resizing the window to see
+the stretch change — the two dropped settings were plain in the text. The
+cause was confirmed later: the file survives headless runs untouched (same
+md5 before and after) and only changes once the editor has opened the
+project.
 
 **What I did:** restored both settings and the header as a separate commit
 before any gameplay change, so the regression couldn't get mixed up with
@@ -66,6 +69,14 @@ worked and `./art --list` listed the skills, including
 
 **Human / AI:** Claude suggested where to look; I ran the searches and
 found the install.
+
+Second failure in the same step: once Python was on PATH, pip crashed
+reading requirements.txt with a GBK decode error. The file is UTF-8 and my
+Windows locale is Chinese, so Python read it as GBK. PYTHONUTF8=1 fixed it,
+and I added it to ~/.bashrc because Brutalist reads other UTF-8 files later.
+Installing into Anaconda's base environment also upgraded numpy and
+protobuf, which broke manim and some unrelated packages in base. Not fixed
+yet; the film doesn't use manim.
 
 ---
 
@@ -308,6 +319,47 @@ cap didn't need raising and no assertion was changed.
 **Human / AI:** I set the constraints — keep zero deaths, don't weaken
 anything, add a check for the new section. Claude Code designed and
 tuned the driver.
+
+---
+
+## 14. Making the film
+
+The approved script was far longer than the gameplay — the whole
+route takes about nine seconds — so Claude Code added extra captures
+and moved the source-code explanations onto animated cards.
+
+Captures run in a real Godot window, and the game pauses when that
+window loses focus. Two long takes were ruined this way without any
+error. Claude Code added a check that compares each take's input log
+against a headless reference run, which caught both.
+
+The first reconstruction of prediction 3 used the level data from
+8d64a7c. By then the bounce pad and cycling platform had been moved
+into their own lists, which the old drawing code doesn't read, so
+both were missing and the character was balanced on a ledge. Claude
+flagged that this didn't match what I'd seen; I confirmed it — when I
+saw the misdrawn spikes, both were still plain platforms and I was
+standing on the pad. It was rebuilt with the data as it actually was
+then.
+
+Watching the first cut, I noticed there was no continuous
+playthrough, only excerpts. I asked for one uncut run of the whole
+route.
+
+Reviewing the script before it was voiced, we caught one beat
+stating the flame changes length while the verdict listed it as
+untested, and a credits line that could read as if no human playtest
+happened.
+
+I also had Gemini review the finished film. It suggested rewriting
+the git history into fewer commits to match the film's story. I
+didn't: the history already shows each step as its own commit, and
+rewriting it would change the hashes the film refers to.
+
+**Human / AI:** I chose the title, the verdict, the Your Turn
+experiment and the cause-and-effect beat, asked for the uncut run,
+and reviewed the script. Claude Code wrote the script, captured,
+rendered and compiled. Claude helped me review the script.
 
 ---
 

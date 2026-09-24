@@ -1,7 +1,7 @@
 # TEST-REPORT
 
 **Engine:** Godot 4.7.2.stable (win64), Compatibility renderer, OpenGL 3.3
-**OS:** Windows [fill in version]
+**OS:** Windows 11
 **GPU:** NVIDIA GeForce RTX 5060 Laptop GPU
 
 Results below are what I actually observed. Anything not yet checked is
@@ -11,7 +11,7 @@ marked as such.
 
 ## Baseline — starter, before my changes
 
-**Revision:** [fill in — 9387542 or 7f19b50]
+**Revision:** 7f19b50
 
 Played the starter by hand before changing anything.
 
@@ -26,8 +26,8 @@ Played the starter by hand before changing anything.
   attempt only, not total time across retries. Retries accumulate.
 - **Failure:** hitting spikes and falling into a gap give different
   messages.
-- **Respawn:** [fill in — where the player reappears after death]
-- **Existing problems noticed:** [fill in, or "none found"]
+- **Respawn:** back at the spawn point at the start of the level
+- **Existing problems noticed:** none found
 
 ---
 
@@ -90,11 +90,12 @@ Checked in a windowed run.
 | Console during play | ✅ engine start-up lines only, no errors or warnings |
 | Airborne, facing readable | ❌ first version recentred the gem → ✅ after revision |
 | Thrusters appear when airborne | ✅ |
-| Flame longer rising than falling | [not yet checked] |
+| Flame longer rising than falling | ✅ verified from the capture — 6.7 px rising, 3.3 px at and after the apex (measured in run-01 at 2.50/2.60/2.75/2.90/3.00 s) |
 | Visual vs collider alignment | [not yet checked] |
 | Facing after respawn | keeps the facing you died with — left unchanged by design |
 
-Screenshots: [add filenames]
+Screenshots: No screenshots saved in the repo; the character states are shown
+in the film.
 
 ---
 
@@ -145,7 +146,14 @@ With only the level data changed, standing at the right end of Ground C:
 | Grid stops at the old width | ✅ hard edge at x 960 |
 | Background rect stops short | not visible — same colour as the clear colour |
 
-Screenshot: [add filename]
+Evidence: shown in the film as **beat B13** (capture
+`youtube/claude-liam-walker-jumpman-walkthrough/capture/run-05.avi`; frame
+extract `_qc/run-05-prediction3.png`), labelled on screen as a reconstruction. This is a **reconstructed
+intermediate state**, not a commit — the level data and the drawing fix both
+landed in 8d64a7c, so no revision ever held the extended level with the pre-fix
+drawing code. The take rebuilds the uncommitted working tree as it stood when the failure
+was seen — 8d64a7c^ drawing code, with the pad and cycling platform still plain
+entries in "solids" — and is a real engine run of that state. Details and hashes in the reel's CAPTURE.md.
 
 ### After fixing the drawing
 
@@ -218,10 +226,25 @@ landing.
 | Coyote: step off a ledge, jump immediately | ✅ jumps |
 | Buffer: press jump just before landing | ✅ jumps on contact |
 | Failure and recovery in the new section | ✅ retries normally |
+| Pause/resume (Esc, Enter) and restart (R) on the final build | ✅ |
+
+The Brutalist coverage check (verify_walkthrough.py) still reports
+pause-resume and manual-restart as undemonstrated. It has no waiver
+mechanism; the waiver and its reason are recorded in coverage.json. Visual
+QC (Gate V) is clean: 48 frames, 0 BLOCKER, 0 MAJOR.
+
+
+---
+
+## Known limitations
+
+- **Menu text is stale.** `hud.gd:40` still reads "Cross two gaps. Clear the
+  spikes. Reach the flag." — that describes the level before the extension, not
+  the one that ships at d88860e. Recorded as a defect and stated in the
+  walkthrough film's verdict; the game is deliberately not changed for the film.
 
 ---
 
 ## Not yet tested
 
-- Flame longer rising than falling (appearance table)
 - Visual vs collider alignment (appearance table)
