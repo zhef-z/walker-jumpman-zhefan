@@ -3,3 +3,9 @@
 capture/
 exports/
 media/
+
+# Generated build output from the compiler. The film is reproducible from the
+# beat sheet, the capture driver and the paperwork; these are caches and carry
+# absolute local paths.
+clips/
+build-state.json
