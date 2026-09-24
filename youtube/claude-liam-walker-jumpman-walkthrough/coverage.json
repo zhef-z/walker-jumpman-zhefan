@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "game": {
+    "name": "walker-jumpman",
+    "build_id": "ca7854871e7935c5065726720033da86d91765d128084ad4df20370b7f939496"
+  },
+  "captures": {
+    "run-01": {
+      "path": "capture/run-01.avi",
+      "sha256": "056348fcb7828e7730dcb3254bb2f23d04a4e1dc85296a3849a1aca77b0e3820",
+      "build_id": "ca7854871e7935c5065726720033da86d91765d128084ad4df20370b7f939496",
+      "method": "scripted-input",
+      "input_log": "capture/run-01-inputs.jsonl"
+    },
+    "run-02": {
+      "path": "capture/run-02.avi",
+      "sha256": "762c5802a4695af2843fa3b6b7f12db1de2526d906cd70eeec65fca92e7b6d27",
+      "build_id": "ca7854871e7935c5065726720033da86d91765d128084ad4df20370b7f939496",
+      "method": "scripted-input",
+      "input_log": "capture/run-02-inputs.jsonl"
+    },
+    "run-04": {
+      "path": "capture/run-04.avi",
+      "sha256": "3dd50a30ad90f7f269b8c6bb0290ade7ac0b5dd8f41137fbbe1a51d9a23ff95e",
+      "build_id": "ca7854871e7935c5065726720033da86d91765d128084ad4df20370b7f939496",
+      "method": "scripted-input",
+      "input_log": "capture/run-04-inputs.jsonl"
+    }
+  },
+  "features": [
+    {
+      "id": "menu-start",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B02",
+          "start_s": 0.0,
+          "action_s": 0.02,
+          "end_s": 2.42,
+          "observation": "Title screen; a confirm press starts the attempt and the HUD timer begins counting.",
+          "riff": "Started through the real menu action, not by calling start_session()."
+        }
+      ]
+    },
+    {
+      "id": "move-horizontal",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B02",
+          "start_s": 0.0,
+          "action_s": 0.05,
+          "end_s": 2.42,
+          "observation": "Holding right accelerates the character to a constant walk speed across Ground A.",
+          "riff": "One speed, reached in about eight ticks; there is no run button to learn."
+        }
+      ]
+    },
+    {
+      "id": "jump-fixed-height",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B02",
+          "start_s": 0.4,
+          "action_s": 0.58,
+          "end_s": 1.2,
+          "observation": "A single press lifts the character onto the step block; height does not vary with how long the key is held.",
+          "riff": "One fixed arc is the whole movement vocabulary, which is what makes the later slot a precision problem rather than a power problem."
+        }
+      ]
+    },
+    {
+      "id": "hazard-spikes-original",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B02",
+          "start_s": 1.3,
+          "action_s": 1.6,
+          "end_s": 2.42,
+          "observation": "The character clears the original spike cluster at x 320 with a jump.",
+          "riff": "The one hazard the starter shipped with, and the one the drawing literals happened to match."
+        }
+      ]
+    },
+    {
+      "id": "gap-crossing",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B04",
+          "start_s": 2.42,
+          "action_s": 2.55,
+          "end_s": 4.6,
+          "observation": "The 64 px gap at x 448 and the 48 px gap at x 736 are both cleared at full speed.",
+          "riff": "Both original gaps sit under 60% of the reachable distance; nothing in the starter tests the limit."
+        }
+      ]
+    },
+    {
+      "id": "character-airborne-state",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B04",
+          "start_s": 2.42,
+          "action_s": 2.75,
+          "end_s": 4.6,
+          "observation": "Thrusters fire while the character is off the ground and stop on landing; the flame is visibly longer while rising than after the apex.",
+          "riff": "Measured from this take: 6.7 logical px rising against 3.3 px falling. The starter had no airborne drawing at all."
+        }
+      ]
+    },
+    {
+      "id": "bounce-pad",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B06",
+          "start_s": 4.2,
+          "action_s": 5.1,
+          "end_s": 6.05,
+          "observation": "Landing on the chevron pad launches the character far higher than a jump and onto the observation deck.",
+          "riff": "A separate constant, -480 against the jump's -320, applied only on pad contact; the jump is unchanged everywhere else."
+        }
+      ]
+    },
+    {
+      "id": "cycling-platform",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-04",
+          "beat_id": "B08",
+          "start_s": 5.8,
+          "action_s": 15.63,
+          "end_s": 16.5,
+          "observation": "The platform is solid, blinks for the last half second, disappears leaving a faint outline, and returns. Three full cycles pass while the route stands on the deck, then it commits and lands.",
+          "riff": "The blink is the whole design: without it a vanishing platform reads as the game cheating rather than as a rhythm you were shown."
+        }
+      ]
+    },
+    {
+      "id": "failure-and-retry",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-02",
+          "beat_id": "B10",
+          "start_s": 7.0,
+          "action_s": 7.85,
+          "end_s": 13.0,
+          "observation": "The route jumps while the platform is absent, falls past the kill line, and the game returns it to the spawn point to run again. Retry counter increments.",
+          "riff": "The miss is the driver's decision; the death is the game's own physics. Cheap retry is the point of the slice."
+        }
+      ]
+    },
+    {
+      "id": "spike-slot-air-control",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B15",
+          "start_s": 7.45,
+          "action_s": 8.07,
+          "end_s": 8.95,
+          "observation": "The character hops from the strip over the first spike cluster and lands in the 40 px gap between the clusters.",
+          "riff": "A full-speed jump overshoots the slot from anywhere standable, so the arc has to be shortened in mid-air. That is the skill the section actually tests."
+        }
+      ]
+    },
+    {
+      "id": "completion-and-replay",
+      "status": "implemented",
+      "evidence": [
+        {
+          "capture": "run-01",
+          "beat_id": "B17",
+          "start_s": 8.95,
+          "action_s": 9.1,
+          "end_s": 10.58,
+          "observation": "Reaching the goal area ends the attempt and shows the completion panel with elapsed time, retry count and a replay prompt.",
+          "riff": "The goal is 56 px tall and a jump is 56 px, so the completion is touched in mid-air rather than on landing."
+        }
+      ]
+    },
+    {
+      "id": "pause-resume",
+      "status": "implemented",
+      "reason": "Implemented in session.gd (_unhandled_input). Not shown in any take; see waiver.",
+      "evidence": [],
+      "waiver": "WAIVED by Zhefan Zhang (human), 2026-09-23: unchanged starter behaviour, not part of this change, not required in the film by the assignment. Verified by hand on the final build: Esc pauses, Enter resumes, R restarts the attempt. Status stays 'implemented' — deliberately NOT relabelled 'planned'. The machine check still reports these as lacking gameplay evidence, which is accurate: they are not demonstrated in the film."
+    },
+    {
+      "id": "manual-restart",
+      "status": "implemented",
+      "reason": "Implemented in session.gd (_unhandled_input). Not shown in any take; see waiver.",
+      "evidence": [],
+      "waiver": "WAIVED by Zhefan Zhang (human), 2026-09-23: unchanged starter behaviour, not part of this change, not required in the film by the assignment. Verified by hand on the final build: Esc pauses, Enter resumes, R restarts the attempt. Status stays 'implemented' — deliberately NOT relabelled 'planned'. The machine check still reports these as lacking gameplay evidence, which is accurate: they are not demonstrated in the film."
+    },
+    {
+      "id": "cherries",
+      "status": "planned",
+      "reason": "Proposed in GDD.md only; never built in this slice.",
+      "evidence": []
+    },
+    {
+      "id": "three-zone-course",
+      "status": "planned",
+      "reason": "GDD.md proposes a full three-zone course. first_steps.json scope field records this slice as 'Control/retry slice, not the proposed full three-zone course'.",
+      "evidence": []
+    },
+    {
+      "id": "audio",
+      "status": "planned",
+      "reason": "GDD.md proposes sound. The game emits no audio; nothing was muted and no sound effects were invented for the film.",
+      "evidence": []
+    }
+  ],
+  "coverage_note": "Two implemented features (pause-resume, manual-restart) carry an explicit human waiver and no gameplay evidence. verify_walkthrough.py therefore fails on them by design; the film makes no completeness claim."
+}

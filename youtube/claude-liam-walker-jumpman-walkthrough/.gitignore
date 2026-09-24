@@ -1,0 +1,5 @@
+# Raw engine captures and rendered masters are large and reproducible.
+# The drivers, paperwork and coverage contract are committed; the bytes are not.
+capture/
+exports/
+media/
