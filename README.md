@@ -52,8 +52,9 @@ a blue cape, a belly glow, arms, and thrusters that fire only in the air.
 - The starter had no airborne visual at all. Now the thrusters fire, the
   gem grows and changes colour, the ball and belly glow brighten, and the
   arms lift. The flame is longer rising than falling.
-- The collider, movement tuning and all gameplay code are unchanged. The
-  new drawing sits inside the collider more tightly than the starter's did.
+- The collider, movement tuning and all gameplay code are unchanged. By its
+  coordinates the new drawing sits inside the collider, apart from the
+  flame. How it reads against collisions in play hasn't been checked.
 
 ### Level
 
@@ -89,6 +90,7 @@ existing assertion was removed or weakened.
   extension.
 - GDScript doesn't fully conform to the official style guide — mainly
   line length, following the starter's style. Details in SOURCES.md.
+- **Visual vs collider alignment not checked in play.**
 - **The bounce pad ignores the jump button** on the tick it fires, so you
   always get the bounce (CHANGE-BRIEF.md Revision 3).
 - **You can still jump for 0.1 s after the cycling platform vanishes**
@@ -116,7 +118,7 @@ existing assertion was removed or weakened.
 
 - Link: https://drive.google.com/file/d/12hrSlaRKc5Z-YdK2Xz9igt2dUo6oxK65/view?usp=drive_link
 - File: `claude-liam-walker-jumpman-walkthrough.mp4`
-- SHA-256: `901342011a34abb816c26df6a88ef4378768d57b68d27564f5b3e5e359b8160c`
+- SHA-256: `46a0c403cc77ace9e3d350c1241277a7fc81f7edd16d0673780cfc3aaf92621d`
 - Length: 6 min 51 s, 3840×2160
 - Game revision shown: `d88860e`
 - Made with Brutalist `godot-waikthrough` + `walker`. Gameplay is scripted

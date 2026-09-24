@@ -79,6 +79,7 @@ That breaks down as:
 - `godot/tests/route_driver.gd`, `godot/tests/test_game.gd` — Claude Code,
   within constraints I set
 - Markdown documents — drafted by Claude, reviewed and revised by me
+- `youtube/.../capture_driver.gd`, `capture_main.gd` — Claude Code
 - Film script and beat sheet — drafted by Claude Code, reviewed and changed
   by me before voicing
 
@@ -97,16 +98,16 @@ That breaks down as:
 - **Predictions:** wrote the first two predicted failures myself (timing
   window wrong in either direction; jumping as the platform vanishes) and
   accepted the third.
-- **Playtesting:** found by playing that the gem lost facing in the air, that
-  the new section was unreachable before the bounce pad worked, and that the
-  cycling platform looked solid while dropping me through it. Ran the
+- **Playtesting:** found by playing that the gem lost facing in the air and
+  that the cycling platform looked solid while dropping me through it.
+  Noticed the film's first cut had no continuous playthrough. Ran the
   prediction tests and the movement checks by hand.
 - **Decisions:** kept the coyote jump off a vanished platform; left facing on
   respawn unchanged; left the stale menu text as a stated defect instead of
-  re-recording; added the data before fixing the drawing so prediction 3
-  could be seen; chose the film's title, verdict and Your Turn experiment.
-- **Review:** read and approved or rejected every diff and every commit, and
-  reviewed the film script line by line before it was voiced.
+  re-recording; agreed to add the level data before fixing the drawing so
+  prediction 3 could be seen; chose the film's title, verdict and Your Turn experiment.
+- **Review:** reviewed diffs before approving them, and sent back or denied
+  several. Reviewed the film script with Claude before it was voiced.
 
 ## Code style
 
@@ -140,10 +141,11 @@ Markdown documents. Gemini summarised a course video. Kokoro generated the
 narration.
 
 **Human did:** set the intent and every design decision for the character
-and the level; wrote the predictions; playtested every section by hand;
-found three problems by playing; decided what to keep, change or leave as a
-stated defect; approved or rejected every diff; reviewed the film script
-before it was voiced; wrote the film's verdict.
+and the level; wrote the first two predictions and accepted the third;
+playtested every section by hand; found two problems by playing; decided
+what to keep, change or leave as a stated defect; reviewed diffs before
+approving them; reviewed the film script before it was voiced; wrote the
+film's verdict.
 
 **Supervisory capacity exercised:** PA — Plausibility Auditing
 
@@ -153,7 +155,8 @@ was correct. When I played it, the platform never blinked and always looked
 solid, but I kept falling through it. The level was only drawn once at
 start-up, so the picture had frozen on its first frame while the collision
 underneath kept switching on and off. Nothing errored. I reported what I
-saw, Claude Code confirmed the cause, and the level now redraws every tick
+saw, Claude suggested two possible causes, and Claude Code confirmed the
+cause, and the level now redraws every tick
 while a cycling platform exists. Re-tested by playing: it blinks, fades to
 an outline, and only drops me when it's visibly gone.
 

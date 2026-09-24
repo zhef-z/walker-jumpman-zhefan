@@ -8,7 +8,7 @@
 **Game-source revision shown in the film:** `d88860e`
 **Godot version and operating system:** Godot 4.7.2.stable (win64), Windows 11
 **Final film URL and filename:** https://drive.google.com/file/d/12hrSlaRKc5Z-YdK2Xz9igt2dUo6oxK65/view?usp=drive_link, `claude-liam-walker-jumpman-walkthrough.mp4`
-**Final film SHA-256:** `901342011a34abb816c26df6a88ef4378768d57b68d27564f5b3e5e359b8160c`
+**Final film SHA-256:** `46a0c403cc77ace9e3d350c1241277a7fc81f7edd16d0673780cfc3aaf92621d`
 
 ## Summary of my changes
 

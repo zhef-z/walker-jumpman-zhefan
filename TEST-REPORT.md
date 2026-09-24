@@ -13,7 +13,7 @@ marked as such.
 
 **Revision:** 7f19b50
 
-Played the starter by hand before changing anything.
+Played the starter by hand before any gameplay change.
 
 - **Controls:** A/D or arrows to move, Space to jump, R to retry, Esc to
   pause. All responded.
@@ -68,6 +68,9 @@ Values worth recording:
 
 Evidence file written: `evidence/mechanics-1790154658.703.json`
 
+Fresh clone of 02276a2 from GitHub, nothing restored: 26 checks / 0
+failures.
+
 Both headless runs left `project.godot` unchanged (same md5), so the
 settings regression in FRICTIONAL.md entries 1–2 comes from the editor, not
 from running the project.
@@ -90,7 +93,7 @@ Checked in a windowed run.
 | Console during play | ✅ engine start-up lines only, no errors or warnings |
 | Airborne, facing readable | ❌ first version recentred the gem → ✅ after revision |
 | Thrusters appear when airborne | ✅ |
-| Flame longer rising than falling | ✅ verified from the capture — 6.7 px rising, 3.3 px at and after the apex (measured in run-01 at 2.50/2.60/2.75/2.90/3.00 s) |
+| Flame longer rising than falling | ✅ measured by Claude Code from the capture — 6.7 px rising, 3.3 px at and after the apex (measured in run-01 at 2.50/2.60/2.75/2.90/3.00 s) |
 | Visual vs collider alignment | [not yet checked] |
 | Facing after respawn | keeps the facing you died with — left unchanged by design |
 
@@ -181,9 +184,9 @@ Checked in play:
 
 ### Route test
 
-**Before:** after the level data changed, the old route could no
-longer finish — it ran out of jump marks at x 712 and couldn't wait for
-the cycling platform. Left failing until the level was complete.
+**Before:** not re-run while the level was incomplete — it couldn't have
+passed: the driver ran out of jump marks at x 712 and couldn't wait for
+the cycling platform.
 
 **What changed in the fixture:**
 - route_driver.gd: jump marks became records with optional wait

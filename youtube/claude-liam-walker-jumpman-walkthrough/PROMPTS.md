@@ -11,7 +11,7 @@ are shown; neither is presented as a historical transcript.
 `CHANGE-BRIEF.md`, which itself was written before any code changed. It is not a
 transcript of a live session, no build receipts or progress output are shown,
 and the on-screen card says so: `Illustrative reconstruction — not a session
-transcript`. Liam repeats it in narration.
+transcript`. Liam's narration states that it is a reconstruction.
 
 > Please use Walker to convert my game design document about a small 2D
 > precision platformer into a playable Godot project. The character is a
@@ -73,5 +73,8 @@ failing route test is itself informative.
 
 The reel was authored by the `godot-waikthrough` skill in `walker` mode against
 this repository, demonstrating revision `d88860e`. The human supplied the title,
-the feel/fun verdict sentence, and the Your Turn experiment; everything else was
-derived from the repository's own records. See `BUILD-PROMPT.md`.
+the feel/fun verdict sentence, and the Your Turn experiment; chose the
+cause-and-effect beat; asked for the uncut full-route beat (B01A) after seeing
+that the first cut had only excerpts; and requested script changes before
+anything was voiced. Everything else was derived from the repository's own
+records. See `BUILD-PROMPT.md`.

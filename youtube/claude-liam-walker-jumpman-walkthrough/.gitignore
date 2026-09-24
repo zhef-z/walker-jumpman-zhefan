@@ -9,3 +9,4 @@ media/
 # absolute local paths.
 clips/
 build-state.json
+mp3/timings.json

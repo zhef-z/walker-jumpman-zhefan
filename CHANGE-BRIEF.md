@@ -400,3 +400,12 @@ happened as predicted: a jump pressed just after the platform vanishes
 still succeeds. I kept it on purpose; reasoning in FRICTIONAL entry 12.
 Prediction 3 happened as predicted, roughly 96 px low, and was fixed
 by deriving the drawing from the level data.
+
+### Revision 5 — the checks weren't run exactly as written
+
+Section 4 describes counted checks. For prediction 1 I played the
+platform repeatedly without keeping the ten-attempt tally, and the
+flicker was in from the first build, so there was no before-and-after
+comparison. For prediction 2 I tried each case but didn't count
+attempts. The results in Revision 4 are what I observed; the counts in
+section 4 were a plan, not a record.

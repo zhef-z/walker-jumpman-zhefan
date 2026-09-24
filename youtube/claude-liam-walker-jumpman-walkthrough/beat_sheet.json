@@ -14,7 +14,7 @@
     "game_revision": "d88860e",
     "description": "Walkthrough of a student extension to walker-jumpman: a bone-coloured automaton, a bounce pad, a cycling platform and a spike slot, plus the drawing bug the change brief predicted before it was written.",
     "build": {
-      "at": "2026-09-23T20:26:08",
+      "at": "2026-09-24T17:22:51",
       "cut": "master",
       "filled": 24,
       "of": 24,
@@ -61,7 +61,7 @@
         "status": "VIDEO",
         "src": "media\\B00.mp4",
         "filled_by": "remotion:ClaudeComposerAsk",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -100,7 +100,7 @@
         "status": "VIDEO",
         "src": "media\\B01.mp4",
         "filled_by": "remotion:ClaudeVerdictArtifact",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -127,7 +127,7 @@
         "status": "VIDEO",
         "src": "media\\B01A.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -154,7 +154,7 @@
         "status": "VIDEO",
         "src": "media\\B02.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -187,7 +187,7 @@
         "status": "VIDEO",
         "src": "media\\B03.mp4",
         "filled_by": "remotion:ClaudeCodeBeat",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -214,7 +214,7 @@
         "status": "VIDEO",
         "src": "media\\B04.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -247,7 +247,7 @@
         "status": "VIDEO",
         "src": "media\\B05.mp4",
         "filled_by": "remotion:ClaudeCodeBeat",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -274,7 +274,7 @@
         "status": "VIDEO",
         "src": "media\\B06.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -307,7 +307,7 @@
         "status": "VIDEO",
         "src": "media\\B07.mp4",
         "filled_by": "remotion:ClaudeCodeBeat",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -334,7 +334,7 @@
         "status": "VIDEO",
         "src": "media\\B08.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -367,7 +367,7 @@
         "status": "VIDEO",
         "src": "media\\B09.mp4",
         "filled_by": "remotion:ClaudeCodeBeat",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -394,13 +394,13 @@
         "status": "VIDEO",
         "src": "media\\B10.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
       "beat_id": "B11",
       "act": "source",
-      "narration_text": "The driver asks the game how much solid time is left, gets zero, and goes anyway. It falls past the kill line, the game's own retry puts it back at the spawn, and it runs the whole route again from the top. No lives, no penalty. Just another try.",
+      "narration_text": "The driver asks the game how much solid time is left, gets zero, and goes anyway. It falls past the kill line, the game's own retry puts it back at the spawn, and the retry starts the route over from the top. No lives, no penalty. Just another try.",
       "voice": "am_onyx",
       "engine": "kokoro",
       "shot": {
@@ -416,18 +416,18 @@
           },
           "rendered": {
             "out": "media/B11.mp4",
-            "at": "2026-09-23T13:42:18.979760+00:00"
+            "at": "2026-09-24T21:16:56.270548+00:00"
           }
         }
       },
       "audio_file": "mp3/beat-B11.mp3",
-      "actual_duration_s": 14.4,
-      "render_duration_s": 14.4,
+      "actual_duration_s": 14.27,
+      "render_duration_s": 14.3,
       "build": {
         "status": "VIDEO",
         "src": "media\\B11.mp4",
         "filled_by": "remotion:ClaudeCodeBeat",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -460,7 +460,7 @@
         "status": "VIDEO",
         "src": "media\\B12.mp4",
         "filled_by": "remotion:ClaudeCodeBeat",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -487,7 +487,7 @@
         "status": "VIDEO",
         "src": "media\\B13.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -520,7 +520,7 @@
         "status": "VIDEO",
         "src": "media\\B14.mp4",
         "filled_by": "remotion:ClaudeCodeBeat",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -547,7 +547,7 @@
         "status": "VIDEO",
         "src": "media\\B15.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -580,7 +580,7 @@
         "status": "VIDEO",
         "src": "media\\B16.mp4",
         "filled_by": "remotion:ClaudeCodeBeat",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -637,7 +637,7 @@
         "status": "VIDEO",
         "src": "media\\B17.mp4",
         "filled_by": "media",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -675,7 +675,7 @@
         "status": "VIDEO",
         "src": "media\\B18.mp4",
         "filled_by": "remotion:ClaudeVerdictArtifact",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -716,13 +716,13 @@
         "status": "VIDEO",
         "src": "media\\B19.mp4",
         "filled_by": "remotion:ClaudeVerdictArtifact",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
       "beat_id": "B20",
       "act": "contributions",
-      "narration_text": "Who did what. The design, the predictions, and every judgement about how it plays are Zhefan Zhang's. Claude Code wrote the implementation, checked the regression numerically, and drove and recorded these captures. Everything you have seen is scripted input, not a human playtest. I played every section by hand separately. That's where the recentring gem and the frozen platform were found. Those playtests are in the test report. The revision shown is d eight eight eight six zero e.",
+      "narration_text": "Who did what. The design, the predictions, and every judgement about how it plays are Zhefan Zhang's. Claude Code wrote the implementation, checked the regression numerically, and drove and recorded these captures. Everything you have seen is scripted input, not a human playtest. Zhefan played every section by hand separately. That's where the recentring gem and the frozen platform were found. Those playtests are in the test report. The revision shown is d eight eight eight six zero e.",
       "voice": "am_onyx",
       "engine": "kokoro",
       "shot": {
@@ -744,18 +744,18 @@
           },
           "rendered": {
             "out": "media/B20.mp4",
-            "at": "2026-09-23T13:52:12.327234+00:00"
+            "at": "2026-09-24T21:19:22.990758+00:00"
           }
         }
       },
       "audio_file": "mp3/beat-B20.mp3",
-      "actual_duration_s": 23.08,
-      "render_duration_s": 23.1,
+      "actual_duration_s": 23.25,
+      "render_duration_s": 23.266666666666666,
       "build": {
         "status": "VIDEO",
         "src": "media\\B20.mp4",
         "filled_by": "remotion:ClaudeVerdictArtifact",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -795,7 +795,7 @@
         "status": "VIDEO",
         "src": "media\\B21.mp4",
         "filled_by": "remotion:ClaudeComposerAsk",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       }
     },
     {
@@ -825,7 +825,7 @@
         "status": "VIDEO",
         "src": "media\\B22.mp4",
         "filled_by": "remotion:ClaudeTitleOutro",
-        "at": "2026-09-23T20:26:08"
+        "at": "2026-09-24T17:22:51"
       },
       "actual_duration_s": 6.066667
     }

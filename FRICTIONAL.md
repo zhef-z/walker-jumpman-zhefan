@@ -107,9 +107,10 @@ mock-ups and worked out coordinates to fit the collider.
 ## 5. Writing the change brief
 
 The first draft of the brief used the per-tick jump numbers Claude Code
-computed (56 px height, 109.3 px distance, 124 px bounce rise). I realised
-I couldn't derive those on the spot if asked — they come from summing the
-engine's per-frame integration. I switched to the textbook formulas
+computed (56 px height, 109.3 px distance, 124 px bounce rise). I asked Claude
+which parts of the brief I'd struggle to defend if questioned, and it
+pointed to these: they come from summing the engine's per-frame
+integration, and I couldn't derive them on the spot. I switched to the textbook formulas
 (v²/2g, 2v/g), which I can work out by hand, and noted that the engine's
 real numbers come out slightly higher, so the textbook values are the
 conservative side. Claude Code later confirmed the real values are higher.
@@ -172,8 +173,8 @@ own, so the gem doesn't need to.
 Change: the gem keeps its facing offset in the air; only its size and
 colour change.
 
-**Human / AI:** I spotted the problem by playing and decided the fix.
-Claude Code makes the edit.
+**Human / AI:** I spotted the problem by playing. Claude suggested keeping
+the gem's offset in the air and I agreed. Claude Code made the edit.
 
 **Re-test:** jumped facing right and facing left — the gem stays at that
 side of the head in the air, so facing is readable throughout the jump.
@@ -182,8 +183,9 @@ side of the head in the air, so facing is readable throughout the jump.
 
 ## 8. Seeing prediction 3 happen before fixing it
 
-I added the new level data first and left the drawing code alone, so I
-could watch it fail on data it was never written for. Standing at the
+Claude suggested adding the new level data first and leaving the drawing
+code alone, so the failure could be seen on data it was never written
+for; I agreed. Standing at the
 right end of Ground C: the new spikes were drawn about 96 px below the
 spike strip, floating in empty air, while the strip above them was bare.
 The FINISH label was still hanging over Ground C, the background grid
@@ -196,9 +198,8 @@ rect also stopped short of the new width, but it's the same colour as the
 clear colour, so there's no seam on screen. Only reading the code found
 it. Not everything wrong can be caught by playing.
 
-**Human / AI:** I chose the order (data first, then fix) so the
-prediction could be tested. Claude Code worked out what would be
-visible from where I could stand.
+**Human / AI:** Claude suggested the order and I agreed. Claude Code
+worked out what would be visible from where I could stand.
 
 ---
 
@@ -213,8 +214,8 @@ original hazard's three spikes came out identical.
 Clamping the hatch marks also changed the section 01 step block, which
 had the same overshoot. Recorded in the brief as Revision 2.
 
-Separately, I sent a contradictory instruction about moving the 04
-labels — "move left" toward a position that was actually to the right.
+Separately, an instruction Claude drafted and I sent was contradictory
+about moving the 04 labels — "move left" toward a position that was actually to the right.
 Claude Code asked which I meant instead of guessing. Moved them left.
 
 ---
@@ -318,7 +319,8 @@ cap didn't need raising and no assertion was changed.
 
 **Human / AI:** I set the constraints — keep zero deaths, don't weaken
 anything, add a check for the new section. Claude Code designed and
-tuned the driver.
+tuned the driver. Claude Code found, while tuning, that the slot can't be
+reached at full speed.
 
 ---
 
@@ -364,3 +366,7 @@ rendered and compiled. Claude helped me review the script.
 ---
 
 ## Open
+
+- Visual vs collider alignment hasn't been checked in play.
+- Whether the editor can be made to keep `aspect="keep"`.
+- Anaconda's base environment still has the upgraded numpy and protobuf.
